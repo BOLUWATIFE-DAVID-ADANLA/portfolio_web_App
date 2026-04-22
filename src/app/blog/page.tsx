@@ -67,7 +67,7 @@ export default function BlogPage() {
                     <span className="font-mono text-[0.48rem] tracking-[0.2em] uppercase text-ink-muted border border-border-subtle px-1.5 py-0.5">
                       {post.tag}
                     </span>
-                    <span className="font-mono text-[0.48rem] tracking-[0.1em] uppercase text-ink-muted">
+                    <span className="font-mono text-[0.48rem] tracking-widest uppercase text-ink-muted">
                       {new Date(post.date).toLocaleDateString('en-GB', {
                         day: 'numeric', month: 'short', year: 'numeric',
                       })}
@@ -111,7 +111,7 @@ export default function BlogPage() {
                     <span className="font-mono text-[0.48rem] tracking-[0.2em] uppercase text-ink-muted border border-border-subtle px-1.5 py-0.5">
                       {post.tag}
                     </span>
-                    <span className="font-mono text-[0.48rem] tracking-[0.1em] uppercase text-ink-muted">
+                    <span className="font-mono text-[0.48rem] tracking-widest uppercase text-ink-muted">
                       {new Date(post.date).toLocaleDateString('en-GB', {
                         day: 'numeric', month: 'short', year: 'numeric',
                       })}
