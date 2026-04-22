@@ -1,0 +1,78 @@
+---
+title: "Jaspr: A Client and Server-Side Rendering Framework That Is Transforming Web Development"
+summary: "Dart powers Flutter — but what about building websites? Jaspr brings familiar Flutter concepts to web development with SSR, fast load times, and SEO support."
+date: "2025-01-03"
+tags: [Engineering]
+draft: false
+---
+
+Dart is a popular programming language among mobile developers because it powers Flutter, a versatile UI toolkit that runs on mobile, web, desktop, and even wearables. While Flutter offers a unified development experience, Flutter Web comes with some limitations — slower load times than traditional web technologies and weak SEO support. Because of this, even the Flutter team recommends using it primarily for web apps rather than standard websites.
+
+![Jaspr framework overview](/images/posts/1_DrFnJush4mLK16XZJ5Lt7Q.png)
+
+## What Is Jaspr?
+
+Jaspr is a framework that lets you build websites using Dart, making it easier to transfer skills and concepts from Flutter. Unlike Flutter Web, Jaspr supports fast page loads and SEO — making it a better choice for building websites.
+
+Jaspr renders HTML and CSS, but it still feels like Flutter because it keeps familiar concepts like Stateless and Stateful widgets. In Jaspr, they are called `StatelessComponent` and `StatefulComponent`, making it easier for Flutter developers to transition to web development while maintaining a familiar structure.
+
+## Key Features
+
+**Server-side rendering (SSR)** — Jaspr supports SSR out of the box, which improves both performance and SEO significantly compared to Flutter Web.
+
+**Hot reload** — Jaspr includes a debug server with automatic reloads, similar to Flutter's Hot Reload, making the development experience smooth and fast.
+
+**Familiar component model** — If you already know Flutter widgets, Jaspr's component model will feel immediately recognisable. The mental model transfers almost directly.
+
+## Integrations
+
+As of now, Jaspr integrates with several libraries:
+
+```yaml
+dependencies:
+  jaspr: latest
+  jaspr_tailwind: latest      # Tailwind CSS (setup is not very straightforward)
+  jaspr_riverpod: latest      # State management
+  jaspr_router: latest        # Navigation
+  jaspr_serverpod: latest     # Backend integration
+```
+
+A basic Jaspr component looks like this:
+
+```dart
+import 'package:jaspr/jaspr.dart';
+
+class HelloWorld extends StatelessComponent {
+  @override
+  Iterable<Component> build(BuildContext context) sync* {
+    yield p(
+      classes: 'text-lg font-bold',
+      [text('Hello from Jaspr!')],
+    );
+  }
+}
+```
+
+Notice how similar this feels to a Flutter `StatelessWidget` — the `build` method, the `BuildContext`, even the general structure. The main difference is that instead of returning Flutter widgets, you are yielding HTML elements.
+
+## Jaspr vs Flutter Web
+
+```plaintext
+                    Flutter Web       Jaspr
+─────────────────────────────────────────────
+Language            Dart              Dart
+Renders             Canvas / HTML     HTML + CSS
+SEO support         Poor              Strong
+Load time           Slow              Fast
+Component model     Widgets           Components
+SSR support         No                Yes
+Best for            Web apps          Websites
+```
+
+## Should You Use It?
+
+If you are a Flutter developer looking to build websites — not web apps — Jaspr is an excellent choice. It bridges the gap between Flutter Web and traditional web frameworks without forcing you to learn a new language or abandon the patterns you already know.
+
+Some integrations like `jaspr_tailwind` require extra setup, but the overall developer experience remains smooth and efficient. The ecosystem is still growing, but the foundation is solid.
+
+Dart on the web, done properly. 🚀

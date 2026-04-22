@@ -1,0 +1,98 @@
+---
+title: "How to Avoid Lint Errors When Creating a Flutter Plugin and Leverage Android Studio's IntelliSense"
+summary: "Writing plugins for Flutter gives you access to native APIs — but lint errors in Android Studio can slow you down. Here is how to fix that."
+date: "2026-04-22"
+tags: [Engineering]
+draft: false
+---
+
+Writing plugins for your Flutter apps allows you to use native APIs and integrate features that are not handled out of the box by Flutter. This tutorial covers how to leverage Android Studio's IntelliSense so you can avoid the dreaded lint errors that show up when you try to edit your `main.kt` file.
+
+As of the time of writing, there is no concrete explanation for why this happens — and for some reason, the Flutter team has yet to fully attend to this issue. But they proffered a workaround, which we are going to walk through here.
+
+## Step 1: Create Your Flutter Plugin
+
+If you have not already created your plugin, run this command:
+
+```bash
+flutter create --org com.my_org --template=plugin --platforms=android,ios -a kotlin -i swift <directory name>
+```
+
+This scaffolds a Flutter plugin with Kotlin for Android and Swift for iOS.
+
+## Step 2: Build the APK
+
+Before writing your platform code, you need to ensure the example app in the boilerplate has been built at least once. Navigate into the example directory first:
+
+```bash
+cd <project name>/example
+```
+
+Then run either of these:
+
+```bash
+flutter build apk --config-only
+```
+
+```bash
+flutter build apk
+```
+
+The `--config-only` flag is faster — it sets up the build configuration without producing a full APK. Either works for our purposes.
+
+## Step 3: Open Android Studio and Sync Gradle
+
+Open the following file in Android Studio:
+
+```plaintext
+<Project Name>/example/android/build.gradle
+```
+
+Allow the Gradle sync to complete. If you see the **Android Gradle Plugin Update** dialog, select **Don't remind me again for this project**. You might not be prompted — if your Gradle syncs cleanly, you are good.
+
+## Step 4: Select the Android View
+
+On the top left of your Android Studio IDE you will see a dropdown. Change it to show only Android-related files. This is the step most tutorials skip — without it, IntelliSense does not activate correctly for your platform code.
+
+![The Android Studio project view dropdown before selecting Android](/images/posts/1_M4VP1NCwxkoJieq9ZYEmmQ.png)
+
+Once you select Android, your file tree will reorganise to show only the relevant Android files.
+
+![The Android Studio project view after Android is selected](/images/posts/1_tEFbnKp2m5scu42QADGOkQ.png)
+
+## Step 5: Write Your Platform Code
+
+Your Android platform code lives here:
+
+```plaintext
+<project name>/kotlin/com.example.<project name>/<project name>Plugin.kt
+```
+
+A basic plugin implementation looks like this:
+
+```kotlin
+class HelloPlugin: FlutterPlugin, MethodCallHandler {
+  private lateinit var channel: MethodChannel
+
+  override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+    channel = MethodChannel(binding.binaryMessenger, "hello")
+    channel.setMethodCallHandler(this)
+  }
+
+  override fun onMethodCall(call: MethodCall, result: Result) {
+    if (call.method == "getPlatformVersion") {
+      result.success("Android ${android.os.Build.VERSION.RELEASE}")
+    } else {
+      result.notImplemented()
+    }
+  }
+
+  override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+    channel.setMethodCallHandler(null)
+  }
+}
+```
+
+I strongly advise keeping VS Code open simultaneously to edit your Flutter-side code — the Dart code that exposes the platform channel and allows you to use it in your apps.
+
+Happy coding 🚀

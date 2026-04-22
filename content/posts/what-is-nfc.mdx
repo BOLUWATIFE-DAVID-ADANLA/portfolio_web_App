@@ -1,0 +1,76 @@
+---
+title: "What is NFC? How NFC Communication Works: A Beginner's Guide"
+summary: "NFC is all around us — from payments to access cards and ticketing. Here is a walkthrough of how this technology works and why it matters."
+date: "2026-04-22"
+tags: [Technology]
+draft: false
+---
+
+Near-field Communication (NFC) is a technology that has gradually become an integral part of our everyday life, from payments to access cards and even ticketing. Sit back, let's walk through the intricacies of this technology and how it affects our lives.
+
+## What Is NFC?
+
+Near-field Communication is a technology that allows devices to communicate or share data packets over a short distance — usually about 4cm. Simply put, NFC is short-range wireless tech powered by electromagnetic induction that enables fast, secure data exchange.
+
+## How Does NFC Technology Work?
+
+What happens under the hood when you use your NFC-enabled card to make payments at your local convenience store?
+
+One device — usually called the **initiator** or the "active device" — generates the radio frequency field and starts the communication. The second device — the **target** or "passive device" — enters the RF field and communicates over the electromagnetic field.
+
+A typical example: your POS terminal is the initiator (it has a power source), and your credit card is the passive device.
+
+## Roles of Each Device
+
+In any NFC session there will always be an active device and a passive device:
+
+- **Active device** — has a power source, generates the RF field
+- **Passive device** — has no power source, depends on the active device to create an environment that supports their interaction
+
+## Modes of Communication
+
+NFC has three main modes of communication.
+
+### Read/Write Mode
+
+One device (a smartphone or reader) reads or writes to a passive tag. Use cases include writing URLs or contact info to an NFC sticker, or scanning product tags in stores and museums.
+
+### Peer-to-Peer Mode
+
+Two NFC-enabled devices share data bi-directionally — like a handshake. Once communication begins, the devices can switch and alternate roles. Use cases include simple file transfer and tap-to-pair via Bluetooth or Wi-Fi.
+
+### Card Emulation Mode
+
+Your NFC-enabled mobile device acts as if it is a physical contactless smart card. The phone is the target, the terminal is the initiator. The device must support either a Secure Element or Host Card Emulation (HCE).
+
+## Security in NFC Communication
+
+While NFC operates over short distances, security remains a top concern — especially in payments, access control, and identity verification.
+
+**Encryption** ensures data transmitted between devices is not easily intercepted or tampered with.
+
+**Secure Element (SE)** is a tamper-resistant component used to store sensitive data like credit card details securely.
+
+**Host Card Emulation (HCE)** provides a software-based alternative to SE, enabling apps to emulate card behaviour while storing credentials via cloud or local encryption.
+
+**Tokenization** replaces sensitive card info with a randomly generated token, making actual card data inaccessible during transactions.
+
+```plaintext
+NFC Session Flow:
+
+[Initiator / Active Device]
+        |
+        | generates RF field
+        ↓
+[Target / Passive Device]
+        |
+        | responds over RF field
+        ↓
+[Data exchanged — encrypted + tokenized]
+```
+
+Though NFC's range is limited — making it harder for attackers to intercept — combining short-range communication with these layers of protection ensures your data is well-guarded.
+
+---
+
+This article is the beginning of an NFC Tech Series, where we will dive deeper into real-world applications, security implications, and hands-on code walkthroughs. Stay tuned.

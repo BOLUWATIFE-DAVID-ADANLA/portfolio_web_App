@@ -1,0 +1,84 @@
+---
+title: "Setting Up Android Studio on Ubuntu"
+summary: "Setting up applications on Linux can be tedious for beginners — but it gets better. Here is a step-by-step guide to getting Android Studio running on Ubuntu."
+date: "2025-03-22"
+tags: [Engineering]
+draft: false
+---
+
+Setting up applications is quite straightforward on a Windows machine, but if you are an IT junky like I am, you might be bold enough to dive into the deep water of Linux and its many distros. For a beginner, setting up applications can be tedious — but I assure you it gets better with time.
+
+Setting up Android Studio on Ubuntu requires your machine to have at least 8GB of RAM and a CPU with x86_64 architecture — a 2nd generation Intel Core or newer, or an AMD processor with support for AMD Virtualization (AMD-V) and SSSE3. For full benchmark requirements, visit the official documentation.
+
+## Step 1: Download and Unpack Android Studio
+
+Download the latest version of Android Studio from the official site. When the download is complete, unpack the `tar.gz` file to a chosen location:
+
+```bash
+# For access within a selected user profile
+/usr/local/
+
+# For global access
+/opt/
+```
+
+## Step 2: Launch Android Studio
+
+Navigate to the `/bin/` directory inside your unpacked Android Studio folder and execute the launch script:
+
+```bash
+./studio.sh
+```
+
+An installation prompt will appear. Follow the instructions and complete the setup.
+
+## Step 3: Create a Desktop Shortcut
+
+Earlier we launched Android Studio as a script. Now we need to set it up as a native launcher, add it to our applications list, and create a desktop shortcut for easy access.
+
+Create a `.desktop` file for the shortcut:
+
+```bash
+nano ~/.local/share/applications/studio.desktop
+```
+
+An editor will open. Paste in the following and update the paths to match your machine — the paths below reflect my local setup:
+
+```ini
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Android Studio
+Exec=/home/boluwatife/Development/android-studio-2024.3.1.13-linux/android-studio/bin/studio
+Icon=/home/boluwatife/Development/android-studio-2024.3.1.13-linux/android-studio/bin/studio.svg
+Terminal=false
+Categories=Development;IDE;
+StartupWMClass=jetbrains-studio
+```
+
+Notice that the `Exec` path does not include `/studio.sh` — this is intentional. We want the app to launch natively rather than via a script.
+
+Press `Ctrl + X` to exit, then `Y` to confirm, then `Enter` to save.
+
+## Step 4: Make the File Executable
+
+```bash
+chmod +x ~/.local/share/applications/studio.desktop
+```
+
+## Step 5: Add the Shortcut to Your Desktop
+
+```bash
+cp ~/.local/share/applications/android-studio.desktop ~/Desktop/
+chmod +x ~/Desktop/android-studio.desktop
+```
+
+## Step 6: Update Your Application List
+
+```bash
+update-desktop-database ~/.local/share/applications/
+```
+
+Your Android Studio icon should now appear on your desktop. Right-click the icon and select **Allow Launching** so you can open the app directly from your desktop.
+
+That is everything you need to get Android Studio running on Ubuntu.

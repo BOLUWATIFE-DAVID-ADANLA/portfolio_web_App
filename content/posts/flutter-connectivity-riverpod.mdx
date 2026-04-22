@@ -1,0 +1,178 @@
+---
+title: "Check Internet Connectivity Globally with Connectivity Plus and Riverpod"
+summary: "A key aspect of good user experience is handling internet connectivity gracefully. Here is how connectivity_plus and Riverpod work together to monitor connection status across your Flutter app."
+date: "2025-01-02"
+tags: [Engineering]
+draft: false
+---
+
+A key aspect of a good user experience is handling internet connectivity gracefully. This guide illustrates how the `connectivity_plus` package and Riverpod can work together to monitor connection status and update the app's state accordingly — ensuring a smooth experience even when the connection changes.
+
+## Step 1: Add Dependencies
+
+Add `hooks_riverpod` and `connectivity_plus` to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  hooks_riverpod: latest
+  connectivity_plus: latest
+```
+
+## Step 2: Declare a Connectivity Enum
+
+Create an enum that tracks the internet connection state:
+
+```dart
+enum ConnectivityState {
+  disconnected,
+  connected,
+}
+```
+
+## Step 3: Create the Connectivity Service
+
+Create a service class that handles communication with the `connectivity_plus` package:
+
+```dart
+class InternetConnectivityChecker {
+  InternetConnectivityChecker() {
+    _initialize();
+  }
+
+  final Connectivity _connectivity = Connectivity();
+  bool hasConnection = false;
+  final StreamController<bool> _connectionChangeController =
+      StreamController<bool>.broadcast();
+
+  Stream<bool> get connectionChange => _connectionChangeController.stream;
+
+  void _initialize() {
+    _connectivity.onConnectivityChanged.listen(
+      (List<ConnectivityResult> result) {
+        _checkInternetConnection();
+      },
+    );
+  }
+
+  Future<void> _checkInternetConnection() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      hasConnection = result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+      debugPrint('Internet Connection: $hasConnection');
+    } on SocketException {
+      hasConnection = false;
+      debugPrint('Internet Connection: $hasConnection');
+    }
+    _connectionChangeController.add(hasConnection);
+    debugPrint('Emitting connection status: $hasConnection');
+  }
+
+  void dispose() {
+    _connectionChangeController.close();
+  }
+}
+```
+
+## Step 4: Create the Notifier
+
+Create a notifier class that manages the connection state using Riverpod's `StateNotifier`:
+
+```dart
+class InternetConnectionNotifier extends StateNotifier<ConnectivityState> {
+  final InternetConnectivityChecker _connectivityService;
+
+  InternetConnectionNotifier(this._connectivityService)
+      : super(ConnectivityState.connected) {
+    _connectivityService.connectionChange.listen((isConnected) {
+      state = isConnected
+          ? ConnectivityState.connected
+          : ConnectivityState.disconnected;
+    });
+  }
+}
+```
+
+## Step 5: Expose the Providers
+
+Create providers that expose the `InternetConnectionNotifier` and `InternetConnectivityChecker` so they can be accessed globally:
+
+```dart
+final connectionProvider =
+    StateNotifierProvider<InternetConnectionNotifier, ConnectivityState>(
+  (ref) {
+    final connection = ref.watch(internetConnectivityCheckerProvider);
+    return InternetConnectionNotifier(connection);
+  },
+);
+
+final internetConnectivityCheckerProvider =
+    Provider<InternetConnectivityChecker>((ref) {
+  return InternetConnectivityChecker();
+});
+```
+
+## Step 6: Wire It Up at the Root
+
+Wrap your app with `ProviderScope`, make your root widget a `ConsumerWidget`, and use `ref.listen` on your connectivity provider. Navigate to a "No Internet" page on disconnection and navigate back only if previously disconnected — to prevent stacking:
+
+```dart
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<ConnectivityState>(connectionProvider, (previous, next) {
+      if (next == ConnectivityState.disconnected) {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const NoInternetView()),
+        );
+      } else if (previous == ConnectivityState.disconnected &&
+          next == ConnectivityState.connected) {
+        Navigator.of(context).pop();
+      }
+    });
+
+    return MaterialApp(
+      title: 'My App',
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home Page')),
+      body: const Center(child: Text('Welcome to my app!')),
+    );
+  }
+}
+```
+
+## Step 7: Add Android Permissions
+
+Add the following permissions to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+For iOS, add the relevant network permissions to your `Info.plist`.
+
+---
+
+This setup ensures your Flutter app actively monitors internet connectivity. When the device loses access, the app automatically displays a dedicated "No Internet" page. When the connection is restored, it smoothly returns to the previously viewed screen — handling network disruptions gracefully without any manual intervention.
