@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 const Footer = () => {
   const socials = [
-    { label: "LinkedIn", href: "#" },
-    { label: "GitHub",   href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/boluwatife-adanla/" },
+    { label: "GitHub",   href: "https://github.com/BOLUWATIFE-DAVID-ADANLA" },
     { label: "Twitter",  href: "#" },
   ];
 
