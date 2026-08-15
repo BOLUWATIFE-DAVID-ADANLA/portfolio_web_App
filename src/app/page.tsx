@@ -1,14 +1,17 @@
 import Hero from "@/components/hero";
-import Posts from "@/components/posts";
 import Projects from "@/components/projects";
-import Image from "next/image";
+import Stack from "@/components/stack";
+import Posts from "@/components/posts";
+import FindMe from "@/components/find-me";
 
 export default function Home() {
   return (
-    <div>
-     <Hero />
-     <Projects/> 
-     <Posts/>
+    <div className="max-w-3xl mx-auto px-6 md:px-10 py-6 md:py-10 flex flex-col gap-14">
+      <Hero />
+      <Projects />
+      <Stack />
+      <Posts />
+      <FindMe />
     </div>
   );
 }
