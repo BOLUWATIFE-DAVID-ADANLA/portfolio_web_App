@@ -1,59 +1,50 @@
 import React from 'react';
+import Link from 'next/link';
+import { getAllCaseStudies } from '@/lib/work/work';
 
-const projects = [
-  {
-    title: "Project One",
-    description: "A short description of what this project does and why it matters.",
-    tag: "Web App",
-    href: "#",
-  },
-  {
-    title: "Project Two",
-    description: "A short description of what this project does and why it matters.",
-    tag: "Tool",
-    href: "#",
-  },
-  {
-    title: "Project Three",
-    description: "A short description of what this project does and why it matters.",
-    tag: "Open Source",
-    href: "#",
-  },
-  {
-    title: "Project Four",
-    description: "A short description of what this project does and why it matters.",
-    tag: "Design",
-    href: "#",
-  },
-];
+const statusLabel: Record<string, string> = {
+  'in-progress': 'In progress',
+  planned: 'Planned',
+  shipped: 'Shipped',
+};
 
 const Projects = () => {
+  const allStudies = getAllCaseStudies();
+  const studies = allStudies.slice(0, 5);
+
   return (
     <section className="flex flex-col gap-4">
       <h2 className="font-semibold text-sm text-foreground">Work</h2>
 
       <div className="flex flex-col gap-4">
-        {projects.map((project) => (
+        {studies.map((study) => (
           <div
-            key={project.title}
+            key={study.slug}
             className="md:grid md:grid-cols-[1fr_200px] md:gap-12 flex flex-col gap-1"
           >
             <div className="flex flex-col gap-1 min-w-0">
-              <a
-                href={project.href}
+              <Link
+                href={`/work/${study.slug}`}
                 className="link-underline inline-flex items-baseline w-fit text-sm text-foreground"
               >
-                {project.title}
-              </a>
+                {study.title}
+              </Link>
               <p className="text-muted text-xs leading-relaxed">
-                {project.description}
+                {study.summary}
               </p>
             </div>
-            <div className="text-foreground text-xs md:pt-[3px]">
-              {project.tag}
+            <div className="flex md:flex-col md:items-end gap-2 md:gap-0.5 text-xs md:pt-[3px]">
+              <span className="text-foreground">{study.category}</span>
+              <span className="text-muted-2">{statusLabel[study.status]}</span>
             </div>
           </div>
         ))}
+
+        {studies.length > 0 && (
+          <Link href="/work" className="link-underline w-fit text-xs text-muted mt-1">
+            All work →
+          </Link>
+        )}
       </div>
     </section>
   );

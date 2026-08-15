@@ -1,0 +1,19 @@
+---
+title: "n8n + LLM Content Pipeline"
+summary: "A content pipeline that pulls from a data source, runs it through an LLM step to structure and summarize, and publishes automatically."
+category: "Automation"
+stack: ["n8n", "LangChain", "APIs"]
+status: "planned"
+order: 4
+draft: false
+---
+
+This case study hasn't started yet — it's next in the pipeline.
+
+## The problem
+
+n8n gets treated as a toy for simple triggers. This project uses it as a real integration layer: pulling raw content from a source, running it through an LLM step for structuring and summarizing, and publishing the result — without a fragile pile of custom glue code.
+
+## The plan
+
+Once built, the write-up will cover why n8n was the right layer for orchestration versus writing custom services, how the LLM step is prompted and validated, and what breaks first when a pipeline like this runs unattended.

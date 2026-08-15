@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Boluwatife David Adanla",
   description:
-    "Software engineer building mobile and backend systems, based in Lagos, Nigeria.",
+    "Software engineer building backend systems and AI integrations — Java, Spring Boot, RAG, MCP — based in Lagos, Nigeria.",
 };
 
 export default function RootLayout({

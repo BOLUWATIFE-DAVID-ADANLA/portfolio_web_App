@@ -1,10 +1,9 @@
 import React from 'react';
 
 const stack = [
-  "Flutter", "Dart", "TypeScript", "React", "React Native", "Next.js",
-  "Jetpack Compose", "Java", "Node.js", "Spring Boot", "PostgreSQL",
-  "MongoDB", "Redis", "Kafka", "RabbitMQ", "Firebase", "Supabase",
-  "Docker", "AWS",
+  "Java", "Spring Boot", "LangChain", "RAG", "MCP", "PostgreSQL", "Redis",
+  "Docker", "AWS", "Dart", "Flutter", "React Native", "TypeScript",
+  "Next.js", "Node.js", "MongoDB", "Kafka", "RabbitMQ",
 ];
 
 const Stack = () => {

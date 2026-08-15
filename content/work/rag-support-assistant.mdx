@@ -1,0 +1,19 @@
+---
+title: "RAG-Powered Support Assistant"
+summary: "A retrieval-augmented agent wired into a real knowledge base, built to give sourced, trustworthy answers instead of confident hallucinations."
+category: "AI Integration"
+stack: ["LangChain", "RAG", "Java", "Spring Boot"]
+status: "in-progress"
+order: 1
+draft: false
+---
+
+This case study is being written as I build — check back soon for the full walkthrough.
+
+## The problem
+
+Most "AI support bot" demos fall apart the moment a business needs to trust the answer. The goal here is a retrieval-augmented assistant that only answers from a real, versioned knowledge base, cites what it used, and fails loudly instead of guessing when it doesn't know.
+
+## Where this stands now
+
+Actively in progress. The write-up will cover the retrieval pipeline design, chunking and indexing decisions, how the agent is grounded against hallucination, and what it took to wire this into a Spring Boot service that a business could actually run in production.

@@ -10,6 +10,9 @@ const Navbar = () => {
       </Link>
 
       <div className="flex items-center gap-5">
+        <Link href="/work" className="link-underline w-fit text-sm text-muted hover:text-foreground transition-colors">
+          Work
+        </Link>
         <Link href="/blog" className="link-underline w-fit text-sm text-muted hover:text-foreground transition-colors">
           Blog
         </Link>

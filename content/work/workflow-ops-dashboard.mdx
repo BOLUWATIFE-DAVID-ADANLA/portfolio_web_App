@@ -1,0 +1,19 @@
+---
+title: "Workflow Ops Dashboard"
+summary: "A web dashboard for monitoring n8n workflow executions — run history, failure alerts, and retries, without living inside the n8n UI."
+category: "Web App"
+stack: ["Next.js", "TypeScript", "n8n API"]
+status: "planned"
+order: 6
+draft: false
+---
+
+This case study hasn't started yet — it's next in the pipeline.
+
+## The problem
+
+Once automations are load-bearing, someone needs visibility into whether they actually ran. This dashboard surfaces n8n execution history, failures, and retries in one place, built for the person who owns the automation, not just the person who built it.
+
+## The plan
+
+Once built, the write-up will cover the data model for tracking runs, how failure alerting is designed, and the trade-offs of building a thin operational layer on top of a tool like n8n instead of replacing it outright.

@@ -1,0 +1,19 @@
+---
+title: "MCP Server for Internal Tooling"
+summary: "An MCP server exposing internal APIs to AI agents, so LLM-driven workflows can safely read and act on real business data."
+category: "AI Integration"
+stack: ["MCP", "TypeScript", "Node.js"]
+status: "planned"
+order: 3
+draft: false
+---
+
+This case study hasn't started yet — it's next in the pipeline.
+
+## The problem
+
+Agents are only as useful as the tools they can safely call. This project exposes a set of internal APIs through an MCP server, with the access boundaries and validation an AI agent needs so it can act on real data without becoming a liability.
+
+## The plan
+
+Once built, the write-up will cover tool design (what an agent should and shouldn't be able to call directly), auth and scoping, and the failure modes that matter most when an LLM is the one holding the keys.

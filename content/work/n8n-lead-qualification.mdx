@@ -1,0 +1,19 @@
+---
+title: "Automating Lead Qualification with n8n"
+summary: "An n8n workflow that qualifies inbound leads against CRM data and routes them automatically, replacing a manual triage process."
+category: "Automation"
+stack: ["n8n", "Webhooks", "LLM", "CRM API"]
+status: "in-progress"
+order: 2
+draft: false
+---
+
+This case study is being written as I build — check back soon for the full walkthrough.
+
+## The problem
+
+Manual lead triage doesn't scale, and most "automation" fixes just move the busywork around instead of removing it. This workflow qualifies and scores inbound leads the moment they land, cross-references existing CRM data, and routes only the ones worth a human's time.
+
+## Where this stands now
+
+Actively in progress. The write-up will cover the workflow architecture, why n8n over a fully custom backend for this piece, the error-handling and retry decisions that keep it reliable, and how the LLM step is scoped so it only handles judgment calls, not the plumbing.
