@@ -27,9 +27,16 @@ const NowPlaying = () => {
 
     fetchNowPlaying()
     const interval = setInterval(fetchNowPlaying, POLL_INTERVAL_MS)
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') fetchNowPlaying()
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
+
     return () => {
       active = false
       clearInterval(interval)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [])
 
