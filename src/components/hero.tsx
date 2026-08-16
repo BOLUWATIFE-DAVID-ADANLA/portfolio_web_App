@@ -13,7 +13,8 @@ const Hero = () => {
     { label: "Based in", value: "Lagos, Nigeria" },
     { label: "Timezone", value: "WAT · UTC+1" },
     { label: "Currently", value: "Open to work" },
-    { label: "Focus", value: "Backend + AI integration" },
+    { label: "Open to", value: "US timezones" },
+    { label: "Focus", value: "Backend + AI integration / Implementation" },
   ];
 
   return (

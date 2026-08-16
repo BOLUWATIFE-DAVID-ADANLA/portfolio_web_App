@@ -22,10 +22,10 @@ const FindMe = () => {
           </a>
         ))}
         <a
-          href="mailto:hello@example.com"
+          href="mailto:adanlaboluwatife@gmail.com"
           className="link-underline inline-flex items-baseline w-fit text-sm text-foreground"
         >
-          hello@example.com
+          adanlaboluwatife@gmail.com
         </a>
       </div>
     </section>
