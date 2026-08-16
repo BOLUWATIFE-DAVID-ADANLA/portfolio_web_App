@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "boluwatifes-portfolio",
+  "name": "portfolio-web-app",
   "compatibility_date": "2026-08-01",
   "compatibility_flags": [
     "nodejs_compat",
@@ -14,7 +14,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "boluwatifes-portfolio"
+      "service": "portfolio-web-app"
     }
   ],
   "images": {
