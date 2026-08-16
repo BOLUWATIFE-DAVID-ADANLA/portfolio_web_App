@@ -1,6 +1,4 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
+import manifest from './work.generated.json'
 
 export type CaseStudy = {
   slug: string
@@ -13,46 +11,34 @@ export type CaseStudy = {
   draft?: boolean
 }
 
-const workDir = path.join(process.cwd(), 'content/work')
+type ManifestEntry = {
+  slug: string
+  data: Record<string, unknown>
+}
+
+function toMeta(entry: ManifestEntry): CaseStudy {
+  const data = entry.data
+  return {
+    slug: entry.slug,
+    title: data.title as string,
+    summary: (data.summary as string) || '',
+    category: (data.category as string) || 'Project',
+    stack: Array.isArray(data.stack) ? (data.stack as string[]) : [],
+    status: (data.status as CaseStudy['status']) || 'planned',
+    order: (data.order as number) ?? 999,
+    draft: (data.draft as boolean) ?? false,
+  }
+}
 
 export function getAllCaseStudies(): CaseStudy[] {
-  const files = fs.readdirSync(workDir)
-
-  return files
-    .filter(f => f.endsWith('.mdx'))
-    .map(f => {
-      const slug = f.replace('.mdx', '')
-      const raw = fs.readFileSync(path.join(workDir, f), 'utf-8')
-      const { data } = matter(raw)
-      return {
-        slug,
-        title: data.title,
-        summary: data.summary || '',
-        category: data.category || 'Project',
-        stack: Array.isArray(data.stack) ? data.stack : [],
-        status: data.status || 'planned',
-        order: data.order ?? 999,
-        draft: data.draft ?? false,
-      }
-    })
-    .filter(study => !study.draft)
+  return (manifest as ManifestEntry[])
+    .map(toMeta)
+    .filter((study) => !study.draft)
     .sort((a, b) => a.order - b.order)
 }
 
-export function getCaseStudy(slug: string) {
-  const filePath = path.join(workDir, `${slug}.mdx`)
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  const { data, content } = matter(raw)
-  return {
-    meta: {
-      title: data.title,
-      summary: data.summary || '',
-      category: data.category || 'Project',
-      stack: Array.isArray(data.stack) ? data.stack : [],
-      status: data.status || 'planned',
-      order: data.order ?? 999,
-      draft: data.draft ?? false,
-    } as Omit<CaseStudy, 'slug'>,
-    content,
-  }
+export function getCaseStudyMeta(slug: string): CaseStudy {
+  const entry = (manifest as ManifestEntry[]).find((e) => e.slug === slug)
+  if (!entry) throw new Error(`Case study not found: ${slug}`)
+  return toMeta(entry)
 }

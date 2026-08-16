@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { getAllPosts, getPost } from '@/lib/posts/post'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { getAllPosts, getPostMeta } from '@/lib/posts/post'
 
 const components = {
   img: ({ src, alt }: { src?: string; alt?: string }) => (
@@ -26,7 +25,8 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { meta, content } = getPost(slug)
+  const meta = getPostMeta(slug)
+  const { default: Content } = await import(`../../../../content/posts/${slug}.mdx`)
 
   return (
     <div className="max-w-2xl mx-auto px-6 md:px-10 py-10 md:py-16">
@@ -59,7 +59,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </div>
 
       <div className="prose-minimal">
-        <MDXRemote source={content} components={components} />
+        <Content components={components} />
       </div>
 
       <div className="border-t border-border mt-16 pt-8 flex items-center justify-between">

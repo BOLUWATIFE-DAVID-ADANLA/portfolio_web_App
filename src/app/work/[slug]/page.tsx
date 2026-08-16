@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { getAllCaseStudies, getCaseStudy } from '@/lib/work/work'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { getAllCaseStudies, getCaseStudyMeta } from '@/lib/work/work'
 
 const statusLabel: Record<string, string> = {
   'in-progress': 'In progress',
@@ -32,7 +31,8 @@ export async function generateStaticParams() {
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { meta, content } = getCaseStudy(slug)
+  const meta = getCaseStudyMeta(slug)
+  const { default: Content } = await import(`../../../../content/work/${slug}.mdx`)
 
   return (
     <div className="max-w-2xl mx-auto px-6 md:px-10 py-10 md:py-16">
@@ -66,7 +66,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </div>
 
       <div className="prose-minimal">
-        <MDXRemote source={content} components={components} />
+        <Content components={components} />
       </div>
 
       <div className="border-t border-border mt-16 pt-8 flex items-center justify-between">
