@@ -4,7 +4,7 @@ const Hero = () => {
   const roles = ["Backend Engineer", "AI Integration", "Mobile Engineer"];
 
   const bio = [
-    "I'm a software engineer with three years building backend and mobile systems — Java, Spring Boot, and Dart — with production experience across fintech and logistics products. I care about turning ambiguous, real-world problems into working software that delivers measurable value.",
+    "I'm a software engineer with Four years building backend and mobile systems — Java, Spring Boot, and Dart — with production experience across fintech and logistics products. I care about turning ambiguous, real-world problems into working software that delivers measurable value.",
     "Lately that same discipline has extended into AI implementation: RAG pipelines, MCP tooling, and agent harnesses wired into real infrastructure, so LLM output is something a business can trust and act on, not just a demo.",
     "I'm tool-agnostic — languages, frameworks, and models are means to an end. I thrive close to the business, hearing a problem directly from a stakeholder and owning the system end to end.",
   ];
