@@ -1,0 +1,46 @@
+---
+title: "The 'Agentic' Buzzword: A Framework for Being Honest About What You Built"
+summary: "A practical three-point framework for deciding whether your app actually deserves the 'agentic' label, or whether you're just borrowing the hype."
+date: "2026-04-22"
+tags: [Engineering]
+draft: true
+---
+"Agentic" has become one of those words that gets thrown around so much it starts to lose meaning. Companies and developers are quietly slapping it on every product they ship, and I get it: everyone wants to appeal to their customers and signal that they're forward leaning, fast to adopt new technology. But if you're not careful, you can barely tell what "agentic" is actually supposed to mean anymore, or how it's supposed to operate in practice.
+
+## A Three Point Framework
+
+When I'm architecting apps, I don't default to calling something "agentic" just because it touches an LLM. I run it through three questions: how much context does the underlying model actually have, how much can you trust its output, and how much agency does it actually have to act on its own. Context, trust, and agency. Get honest answers to those three, and you know exactly what you've built.
+
+### Context
+
+Context is how much background information the underlying model has access to. Say you're building a domain specific app, something like a fintech app for dogs, and you want to sell the "agentic" label to your customers. You need to determine how much context the agent actually has to work with. Does it have access to user specific variables, like an individual's transaction history or preferences? Does it have access to variables that stay constant across your entire user base, like policy rules or product constraints?
+
+The amount and quality of context an agent has access to directly shapes how good, how relevant, and how safe its decisions can be. An agent operating on thin or generic context is not meaningfully different from a basic chatbot wearing an agentic costume.
+
+### Trust
+
+Trust comes down to one question: is the agent's output actually trustworthy? Can a user rely on it to do the right thing, and to do it correctly, consistently, without you having to double check everything behind the scenes?
+
+> Trust isn't a feeling you decide to have. It's something you have to build through testing, guardrails, and a track record of the system behaving predictably under real conditions, including edge cases and failure modes.
+
+If your users can't rely on the output without verifying it themselves every time, you don't have a trustworthy agent yet, no matter what you call it.
+
+### Agency (Autonomy)
+
+Agency, or autonomy, is the ability of your agent to carry out tasks on its own, if it's allowed to and if it's operating in a controlled environment with the tools it needs for execution, on behalf of your users. This is the piece most people jump to first when they hear "agentic," but it only makes sense once context and trust are already in place. An agent with high autonomy but weak context or low trust isn't impressive. It's a liability.
+
+## Turning This Into a Decision: Three Classes
+
+I use these three points to sort my apps into one of three classes: manual, semi-autonomous, and fully autonomous.
+
+**Manual.** If a task requires a lot of human input across the reasoning, planning, and execution stages, it is largely manual, regardless of whether you're using other tools or software to reduce friction. Automating a few redundant steps doesn't make a process agentic, it just makes it faster. The human is still the one doing the actual thinking and deciding.
+
+**Semi-autonomous.** This is where, from my judgment, we currently are, and where I believe most organizations sit today. A lot of organizations have massive AI budgets. They are trying to harness and genuinely benefit from AI, but they're honestly confused about how to fit it into their existing messy, legacy systems. It wouldn't be in their best interest to totally outsource their processes to an LLM. The smart business decision is to keep a human in the loop to catch the LLM's mistakes and make sure it isn't quietly running the business into the ground. Many companies are running on duct taped systems, unable to unify or overhaul their entire stack, so they automate only parts of their workflows while leaning heavily on human oversight to approve the results.
+
+**Fully autonomous.** I genuinely don't think we're here yet. I don't believe we're at the point where businesses can fully outsource their processes without humans in the loop to manage LLM oversight. Maybe we get there eventually, but claiming it today is premature, and honestly a little dishonest.
+
+## Why It Matters
+
+This is the framework I use to label my own apps as agentic or not, and I'd argue it's worth adopting more broadly. Context tells you how informed your agent really is. Trust tells you how much weight that information can bear. Agency tells you how much you can actually let go of the wheel.
+
+Skip any one of these three and the label becomes marketing rather than architecture. In a market this saturated with the word, the products that are honest about where they actually sit on this spectrum are the ones that will earn real trust, instead of just borrowing the hype.
