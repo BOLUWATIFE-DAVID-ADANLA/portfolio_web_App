@@ -7,6 +7,7 @@ export type Post = {
   date: string
   tag: string
   draft?: boolean
+  readingMinutes: number
 }
 
 type ManifestEntry = {
@@ -23,6 +24,7 @@ function toMeta(entry: ManifestEntry): Post {
     date: data.date as string,
     tag: Array.isArray(data.tags) ? (data.tags[0] as string) : ((data.tag as string) || 'Essay'),
     draft: (data.draft as boolean) ?? false,
+    readingMinutes: Math.max(1, Math.round((data.wordCount as number ?? 0) / 200)),
   }
 }
 

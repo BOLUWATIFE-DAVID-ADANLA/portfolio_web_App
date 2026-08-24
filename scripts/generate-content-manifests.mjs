@@ -9,6 +9,19 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 
+function countWords(content) {
+  const stripped = content
+    .replace(/```[\s\S]*?```/g, ' ') // fenced code blocks
+    .replace(/`[^`]*`/g, ' ') // inline code
+    .replace(/<[^>]*>/g, ' ') // jsx/html tags
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ') // images
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links -> text
+    .replace(/[#>*_~`-]/g, ' ') // markdown punctuation
+
+  const words = stripped.trim().split(/\s+/).filter(Boolean)
+  return words.length
+}
+
 function buildManifest(dir) {
   if (!fs.existsSync(dir)) return []
 
@@ -18,8 +31,9 @@ function buildManifest(dir) {
     .map((f) => {
       const slug = f.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(dir, f), 'utf-8')
-      const { data } = matter(raw)
-      return { slug, data }
+      const { data, content } = matter(raw)
+      const wordCount = countWords(content)
+      return { slug, data: { ...data, wordCount } }
     })
 }
 

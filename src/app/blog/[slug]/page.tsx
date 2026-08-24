@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAllPosts, getPostMeta } from '@/lib/posts/post'
+import ReadingProgress from '@/components/reading-progress'
 
 const components = {
   img: ({ src, alt }: { src?: string; alt?: string }) => (
@@ -31,6 +32,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <div className="max-w-2xl mx-auto px-6 md:px-10 py-10 md:py-16">
 
+      <ReadingProgress targetId="post-content" readingMinutes={meta.readingMinutes} />
+
       <Link
         href="/blog"
         className="link-underline text-xs text-muted inline-block mb-10"
@@ -47,6 +50,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               day: 'numeric', month: 'long', year: 'numeric',
             })}
           </span>
+          <span>·</span>
+          <span>{meta.readingMinutes} min read</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-light tracking-[-0.02em] leading-tight text-foreground">
           {meta.title}
@@ -58,7 +63,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         )}
       </div>
 
-      <div className="prose-minimal">
+      <div id="post-content" className="prose-minimal">
         <Content components={components} />
       </div>
 
