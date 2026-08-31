@@ -1,19 +1,82 @@
 ---
 title: "MCP Server for Internal Tooling"
-summary: "An MCP server exposing internal APIs to AI agents, so LLM-driven workflows can safely read and act on real business data."
+summary: "An MCP server that exposes Tediware's X12 EDI reference lookups and file validation as tools an LLM agent can call directly, without giving the model a Tediware API key or teaching it EDI parsing."
 category: "AI Integration"
 stack: ["MCP", "TypeScript", "Node.js"]
-status: "planned"
+status: "shipped"
 order: 3
 draft: false
 ---
 
-This case study hasn't started yet — it's next in the pipeline.
-
 ## The problem
 
-Agents are only as useful as the tools they can safely call. This project exposes a set of internal APIs through an MCP server, with the access boundaries and validation an AI agent needs so it can act on real data without becoming a liability.
+An LLM agent working on EDI tasks needs two things constantly: "what does the X12 standard say about this segment/element/transaction set" and "is this file actually valid." Both answers already exist, inside Tediware and its `tedi` CLI. The problem is handing an agent access to that without handing it a Tediware API key, without teaching it EDI parsing logic it doesn't need, and without letting it fabricate an answer when the underlying tool fails or comes back empty.
 
-## The plan
+MCP is the natural shape for this: a small, typed surface between the agent and the real tool. The risk with that shape is scope creep. It's tempting to let the server also parse the markdown it gets back, cache results, or start making judgment calls about what's valid. Tedi-MCP deliberately doesn't do any of that.
 
-Once built, the write-up will cover tool design (what an agent should and shouldn't be able to call directly), auth and scoping, and the failure modes that matter most when an LLM is the one holding the keys.
+## What it does
+
+Tedi-MCP wraps the `tedi` CLI in four MCP tools:
+
+- `lookup_segment` for X12 segment definitions (`REF`, `N1`, `DTM`)
+- `lookup_transaction_set` for transaction set structure (`837`, `835`, `270`)
+- `lookup_element` for data element definitions, types, and valid codes
+- `inspect_edi_file` to validate a real `.edi`/`.x12` file and return a markdown error/notice report
+
+Every tool call becomes one `tedi ... --format markdown` invocation. The server passes the raw markdown straight back to the agent as `{ content: [{ type: "text", text: "..." }] }`. It never parses that output into structured data; interpreting it is the calling agent's job. That's a narrower contract than it sounds like, and it's the one that keeps the server from silently becoming an EDI parser of its own.
+
+## Architecture: transport-agnostic by design
+
+The dependency chain is deliberately layered:
+
+![Tedi-MCP architecture: an LLM agent talks to src/stdio.ts over MCP stdio, which registers tools in src/tools.ts, which calls the TediwareClient interface, implemented by CliTediwareClient, which shells out to the tedi CLI, which hits the Tediware API. An HttpTediwareClient stub sits alongside as a future direct-API implementation.](/images/work/mcp-internal-tooling/architecture.png)
+
+`tools.ts` only ever talks to the `TediwareClient` interface, not to the CLI directly. An `HttpTediwareClient` stub already exists for a future direct-API implementation; every method on it currently throws `"not implemented"`. Swapping it in later is a change to one file, not a rewrite of the tool layer.
+
+There are two entrypoints on top of that same core:
+
+| Entrypoint | Transport | Who it's for | Auth |
+|---|---|---|---|
+| `src/stdio.ts` | MCP over stdio | A single local user (Claude Code/Desktop) | `TEDI_API_KEY` from the local shell |
+| `src/sse.ts` | MCP over Streamable HTTP | A single user, reachable remotely (e.g. an n8n workflow) | `TEDI_API_KEY` from the server's own env + `MCP_AUTH_TOKEN` gating the endpoint |
+
+`sse.ts` is still single-user. It holds one `CliTediwareClient` and reads the Tediware key from its own environment, exactly like `stdio.ts` does. No caller ever supplies a key. Because it listens on the network, it adds a second, unrelated credential: `MCP_AUTH_TOKEN`. The process refuses to start without one, so it can't come up unauthenticated on the open internet by accident, and every request needs `Authorization: Bearer <MCP_AUTH_TOKEN>` or it gets a `401`. Multiple MCP sessions, tracked by `Mcp-Session-Id`, share the one `CliTediwareClient` instance and its `tedi` subprocess pool.
+
+## Guarding against runaway subprocesses
+
+Every tool call shells out to a fresh `tedi` process, which is fine until an agent starts calling tools in a loop or several sessions pile on at once. `CliTediwareClient` bounds that in two ways:
+
+- A per-call **timeout** (`timeoutMs`, default 15s) that kills a hung `tedi` process instead of leaving it running.
+- A **concurrency cap** (`maxConcurrent`, default 8) so extra calls queue instead of stacking processes on the host.
+
+Both are constructor options, so a deployment under heavier load can tune them without touching the tool logic.
+
+## The exit-code contract
+
+This is the detail that matters most for an agent holding the keys. `CliTediwareClient` reads `tedi`'s exit code, not just its stdout, and treats each case differently:
+
+| exit | meaning | server behavior |
+|---|---|---|
+| 0 | clean, ran fine | return stdout |
+| 1 | ran, found something (including "not found") | return stdout, this is still real data |
+| 2 or other | did not run, or the result can't be trusted | throw, surfaces to the agent as a tool error |
+
+The distinction between exit 1 and exit 2 is doing real work here. "This segment doesn't exist" is a legitimate answer the agent should see as text. "The CLI didn't run, or its output can't be trusted" has to fail loudly, as a thrown error, rather than come back looking like a normal response. Collapsing those two into "just check if stdout is non-empty" would have let a broken environment produce a confident, wrong-looking-right answer to the agent. Since the server has no EDI logic of its own to sanity-check the response against, the exit code is the only signal it has, so treating it as data rather than noise is the whole safety property.
+
+## Auth stays out of the LLM's reach
+
+The server doesn't authenticate anything itself. It shells out to whatever `tedi` is already configured to do on the host, using a key read from the server's own environment (`TEDI_API_KEY`), never from a request or a tool argument. The key should never be pasted into a chat with an agent; it belongs in the shell environment or in the MCP client's stored config (e.g. `claude mcp add --env`). If `tedi` isn't authenticated on the host, calls fail loudly rather than quietly returning nothing, which is the same exit-code contract doing double duty as an auth check.
+
+## Explicitly out of scope
+
+OCR, document classification, guide-drafting logic, the n8n workflow around it, and any human review UI are all out of scope for this repo on purpose, documented in `AGENTS.md` as the architecture contract. The server's job is answering "what does the standard say" and "is this file valid," nothing else, which is what keeps the tool surface small enough for an agent to use safely.
+
+## Verifying before wiring into a real client
+
+Every change gets checked with the MCP Inspector before it touches a live agent:
+
+```bash
+npx @modelcontextprotocol/inspector node build/stdio.js
+```
+
+The checklist covers connection status, that all four tools list correctly, that a working call returns text with no `isError`, and specifically that the two exit-code paths behave differently: an unknown ID still returns text (exit 1), while a bad path or missing auth surfaces as an actual tool error (exit 2 or spawn failure), not silent success.
