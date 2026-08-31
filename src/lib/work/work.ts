@@ -32,11 +32,17 @@ function toMeta(entry: ManifestEntry): CaseStudy {
   }
 }
 
+const statusRank: Record<CaseStudy['status'], number> = {
+  shipped: 0,
+  'in-progress': 1,
+  planned: 2,
+}
+
 export function getAllCaseStudies(): CaseStudy[] {
   return (manifest as ManifestEntry[])
     .map(toMeta)
     .filter((study) => !study.draft)
-    .sort((a, b) => a.order - b.order)
+    .sort((a, b) => statusRank[a.status] - statusRank[b.status] || a.order - b.order)
 }
 
 export function getCaseStudyMeta(slug: string): CaseStudy {
