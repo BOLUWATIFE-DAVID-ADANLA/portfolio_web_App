@@ -63,6 +63,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             {meta.stack.join(" · ")}
           </p>
         )}
+        {meta.repo && (
+          <a
+            href={meta.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline text-xs text-muted inline-block w-fit"
+          >
+            View source on GitHub →
+          </a>
+        )}
       </div>
 
       <div className="prose-minimal">

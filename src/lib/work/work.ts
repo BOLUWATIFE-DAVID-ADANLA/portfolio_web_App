@@ -9,6 +9,7 @@ export type CaseStudy = {
   status: 'in-progress' | 'planned' | 'shipped'
   order: number
   draft?: boolean
+  repo?: string
 }
 
 type ManifestEntry = {
@@ -27,6 +28,7 @@ function toMeta(entry: ManifestEntry): CaseStudy {
     status: (data.status as CaseStudy['status']) || 'planned',
     order: (data.order as number) ?? 999,
     draft: (data.draft as boolean) ?? false,
+    repo: data.repo as string | undefined,
   }
 }
 
