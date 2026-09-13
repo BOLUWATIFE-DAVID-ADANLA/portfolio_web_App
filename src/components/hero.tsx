@@ -1,11 +1,11 @@
 import React from 'react';
 
 const Hero = () => {
-  const roles = ["Backend Engineer", "AI Integration", "Mobile Engineer"];
+  const roles = ["Software Engineer", "AI Implementation Specialist", "Mobile Engineer"];
 
   const bio = [
-    "I'm a software engineer with Four years building backend and mobile systems — Java, Spring Boot, and Dart — with production experience across fintech and logistics products. I care about turning ambiguous, real-world problems into working software that delivers measurable value.",
-    "Lately that same discipline has extended into AI implementation: RAG pipelines, MCP tooling, and agent harnesses wired into real infrastructure, so LLM output is something a business can trust and act on, not just a demo.",
+    "I'm a software engineer with four years building backend and mobile systems — Java, Spring Boot, and Dart — with production experience across fintech and logistics products. I care about turning ambiguous, real-world problems into working software that delivers measurable value.",
+    "That backend discipline is what makes my AI implementation work hold up in production: RAG pipelines, MCP tooling, and agent harnesses I design and wire into real infrastructure — not prototypes, but systems a business can trust and act on. I'm as comfortable architecting how the pieces fit together as I am shipping the code that runs them.",
     "I'm tool-agnostic — languages, frameworks, and models are means to an end. I thrive close to the business, hearing a problem directly from a stakeholder and owning the system end to end.",
   ];
 
@@ -14,7 +14,7 @@ const Hero = () => {
     { label: "Timezone", value: "WAT · UTC+1" },
     { label: "Currently", value: "Open to work" },
     { label: "Open to", value: "US timezones" },
-    { label: "Focus", value: "Backend + AI integration / Implementation" },
+    { label: "Focus", value: "Backend Engineering + AI Systems Architecture" },
   ];
 
   return (

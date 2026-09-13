@@ -73,7 +73,7 @@ export default function AboutPage() {
           implementation. Across 4+ years in software engineering, spanning fintech, ERP, and
           supply chain products, I have built the APIs, automation pipelines, and AI-driven
           systems that turn ambiguous business processes into infrastructure a company can
-          actually run on.
+          actually run on — designing the architecture as much as writing the code that ships it.
         </p>
 
         <figure className="relative group md:sticky md:top-24 w-full">
