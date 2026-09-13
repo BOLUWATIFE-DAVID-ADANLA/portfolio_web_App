@@ -1,7 +1,6 @@
 import Hero from "@/components/hero";
 import NowPlaying from "@/components/now-playing";
 import Projects from "@/components/projects";
-import Stack from "@/components/stack";
 import Posts from "@/components/posts";
 import FindMe from "@/components/find-me";
 
@@ -11,7 +10,6 @@ export default function Home() {
       <NowPlaying />
       <Hero />
       <Projects />
-      <Stack />
       <Posts />
       <FindMe />
     </div>

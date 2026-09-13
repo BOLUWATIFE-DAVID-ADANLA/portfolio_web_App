@@ -8,6 +8,7 @@ const whatIDo = [
       'Led end-to-end implementation of an AI-powered document processing pipeline at Oh-Res Inc, integrating Amazon Textract (OCR) and LangChain-based orchestration into a Spring Boot backend to convert unstructured business documents into structured EDI data',
       'Designed n8n workflows to orchestrate document ingestion, OCR processing, and downstream data routing, giving non-technical stakeholders visibility into pipeline status without engineering involvement',
       'Own end-to-end workflow automation at NextlevelCEOs, building n8n-driven pipelines that capture leads, automate client communication and follow-up timing, and feed structured data into leadership-facing retention insights',
+      'Integrate automation layers with CRM and PM platforms — HubSpot, Salesforce, Airtable, GoHighLevel — so lead capture, follow-up, and status tracking flow into the tools teams already run on, without manual re-entry',
       'Architected and self-host automation infrastructure on a VPS using Docker, with CI/CD pipelines for repeatable deployment of workflow and infrastructure changes',
       'Work with LLMs, LangChain, MCP (Model Context Protocol), and multi-agent orchestration to build AI systems grounded in production architecture rather than one-off scripts',
     ],
@@ -22,12 +23,13 @@ const whatIDo = [
     ],
   },
   {
-    heading: 'Mobile & Web Development',
+    heading: 'Frontend & Mobile Development',
     items: [
       'Designed and built a responsive, cross-platform mobile app using Flutter and Dart at Flaury, architecting app state with Riverpod and helping secure $5,000 in funding off the MVP',
       'Engineered NFC Tap-to-Pay functionality using native Android APIs (Java, Kotlin), reducing transaction errors by 30%',
       'Integrated ML-based liveness detection and QR payment support (EMVCo standard) for fraud prevention and KYC/AML compliance',
       'Led architectural consolidation of three separate apps into a single unified codebase, working alongside a lead developer on module structure, state management, and data caching',
+      'Build production web interfaces with React, Next.js, and TypeScript — including this site — with the same attention to state management and data flow I bring to mobile',
       'Build client-facing websites in WordPress and Webflow, embedding GoHighLevel as a CRM layer that routes leads directly into automated backend workflows',
     ],
   },
@@ -52,6 +54,9 @@ const techStack: { name: string; hex?: string; path?: string }[] = [
   { name: "GitHub Actions", hex: "2088FF", path: "M10.984 13.836a.5.5 0 0 1-.353-.146l-.745-.743a.5.5 0 1 1 .706-.708l.392.391 1.181-1.18a.5.5 0 0 1 .708.707l-1.535 1.533a.504.504 0 0 1-.354.146zm9.353-.147l1.534-1.532a.5.5 0 0 0-.707-.707l-1.181 1.18-.392-.391a.5.5 0 1 0-.706.708l.746.743a.497.497 0 0 0 .706-.001zM4.527 7.452l2.557-1.585A1 1 0 0 0 7.09 4.17L4.533 2.56A1 1 0 0 0 3 3.406v3.196a1.001 1.001 0 0 0 1.527.85zm2.03-2.436L4 6.602V3.406l2.557 1.61zM24 12.5c0 1.93-1.57 3.5-3.5 3.5a3.503 3.503 0 0 1-3.46-3h-2.08a3.503 3.503 0 0 1-3.46 3 3.502 3.502 0 0 1-3.46-3h-.558c-.972 0-1.85-.399-2.482-1.042V17c0 1.654 1.346 3 3 3h.04c.244-1.693 1.7-3 3.46-3 1.93 0 3.5 1.57 3.5 3.5S13.43 24 11.5 24a3.502 3.502 0 0 1-3.46-3H8c-2.206 0-4-1.794-4-4V9.899A5.008 5.008 0 0 1 0 5c0-2.757 2.243-5 5-5s5 2.243 5 5a5.005 5.005 0 0 1-4.952 4.998A2.482 2.482 0 0 0 7.482 12h.558c.244-1.693 1.7-3 3.46-3a3.502 3.502 0 0 1 3.46 3h2.08a3.503 3.503 0 0 1 3.46-3c1.93 0 3.5 1.57 3.5 3.5zm-15 8c0 1.378 1.122 2.5 2.5 2.5s2.5-1.122 2.5-2.5-1.122-2.5-2.5-2.5S9 19.122 9 20.5zM5 9c2.206 0 4-1.794 4-4S7.206 1 5 1 1 2.794 1 5s1.794 4 4 4zm9 3.5c0-1.378-1.122-2.5-2.5-2.5S9 11.122 9 12.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5zm9 0c0-1.378-1.122-2.5-2.5-2.5S18 11.122 18 12.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5zm-13 8a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0zm2 0a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0zm12 0c0 1.93-1.57 3.5-3.5 3.5a3.503 3.503 0 0 1-3.46-3.002c-.007.001-.013.005-.021.005l-.506.017h-.017a.5.5 0 0 1-.016-.999l.506-.017c.018-.002.035.006.052.007A3.503 3.503 0 0 1 20.5 17c1.93 0 3.5 1.57 3.5 3.5zm-1 0c0-1.378-1.122-2.5-2.5-2.5S18 19.122 18 20.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5z" },
   { name: "WordPress", hex: "21759B", path: "M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0" },
   { name: "GoHighLevel" },
+  { name: "HubSpot", hex: "FF7A59", path: "M18.164 7.93V5.084a2.198 2.198 0 001.267-1.978v-.067A2.2 2.2 0 0017.238.845h-.067a2.2 2.2 0 00-2.193 2.193v.067a2.196 2.196 0 001.252 1.973l.013.006v2.852a6.22 6.22 0 00-2.969 1.31l.012-.01-7.828-6.095A2.497 2.497 0 104.3 4.656l-.012.006 7.697 5.991a6.176 6.176 0 00-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-.013-.02-2.342 2.343a1.968 1.968 0 00-.58-.095h-.002a2.033 2.033 0 102.033 2.033 1.978 1.978 0 00-.1-.595l.005.014 2.317-2.317a6.247 6.247 0 104.782-11.134l-.036-.005zm-.964 9.378a3.206 3.206 0 113.215-3.207v.002a3.206 3.206 0 01-3.207 3.207z" },
+  { name: "Salesforce", hex: "00A1E0", path: "M10.006 5.415a4.195 4.195 0 013.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 01-3.3 1.95c-.6 0-1.155-.15-1.65-.375A4.314 4.314 0 018.88 20.4a4.302 4.302 0 01-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8" },
+  { name: "Airtable", hex: "18BFFF", path: "M11.992 1.966c-.434 0-.87.086-1.28.257L1.779 5.917c-.503.208-.49.908.012 1.116l8.982 3.558a3.266 3.266 0 0 0 2.454 0l8.982-3.558c.503-.196.503-.908.012-1.116l-8.957-3.694a3.255 3.255 0 0 0-1.272-.257zM23.4 8.056a.589.589 0 0 0-.222.045l-10.012 3.877a.612.612 0 0 0-.38.564v8.896a.6.6 0 0 0 .821.552L23.62 18.1a.583.583 0 0 0 .38-.551V8.653a.6.6 0 0 0-.6-.596zM.676 8.095a.644.644 0 0 0-.48.19C.086 8.396 0 8.53 0 8.69v8.355c0 .442.515.737.908.54l6.27-3.006.307-.147 2.969-1.436c.466-.22.43-.908-.061-1.092L.883 8.138a.57.57 0 0 0-.207-.044z" },
 ]
 
 export default function AboutPage() {
@@ -69,8 +74,9 @@ export default function AboutPage() {
 
       <section className="md:grid md:grid-cols-[1fr_240px] md:gap-14 flex flex-col-reverse gap-8 items-start">
         <p className="text-base md:text-lg text-muted leading-[1.7] max-w-prose">
-          I work at the intersection of backend engineering, workflow automation, and AI
-          implementation. Across 4+ years in software engineering, spanning fintech, ERP, and
+          I work at the intersection of backend engineering, frontend and mobile development,
+          workflow automation, and AI implementation. Across 4+ years in software engineering,
+          spanning fintech, ERP, and
           supply chain products, I have built the APIs, automation pipelines, and AI-driven
           systems that turn ambiguous business processes into infrastructure a company can
           actually run on — designing the architecture as much as writing the code that ships it.
@@ -128,7 +134,12 @@ export default function AboutPage() {
                 </svg>
               ) : (
                 <span className="flex h-5 w-5 items-center justify-center rounded-sm bg-muted-2/20 text-[8px] font-semibold text-muted shrink-0">
-                  GHL
+                  {tech.name
+                    .split(/\s+/)
+                    .map((w) => w[0])
+                    .join("")
+                    .slice(0, 3)
+                    .toUpperCase()}
                 </span>
               )}
               <span className="font-medium text-foreground">{tech.name}</span>

@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Hero = () => {
-  const roles = ["Software Engineer", "AI Implementation Specialist", "Mobile Engineer"];
+  const roles = ["Software Engineer", "AI Implementation Specialist", "Frontend & Mobile Engineer"];
 
   const bio = [
-    "I'm a software engineer with four years building backend and mobile systems — Java, Spring Boot, and Dart — with production experience across fintech and logistics products. I care about turning ambiguous, real-world problems into working software that delivers measurable value.",
+    "I'm a software engineer with four years building backend, frontend, and mobile systems — Java, Spring Boot, Dart, and React/TypeScript — with production experience across fintech and logistics products. I care about turning ambiguous, real-world problems into working software that delivers measurable value.",
     "That backend discipline is what makes my AI implementation work hold up in production: RAG pipelines, MCP tooling, and agent harnesses I design and wire into real infrastructure — not prototypes, but systems a business can trust and act on. I'm as comfortable architecting how the pieces fit together as I am shipping the code that runs them.",
     "I'm tool-agnostic — languages, frameworks, and models are means to an end. I thrive close to the business, hearing a problem directly from a stakeholder and owning the system end to end.",
   ];
