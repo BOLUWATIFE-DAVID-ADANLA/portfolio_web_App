@@ -22,7 +22,7 @@ export default function ContactPage() {
       <section className="relative border-y border-border bg-surface/50 overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-60 [background-image:linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
+          className="absolute inset-0 [background-image:radial-gradient(var(--muted-2)_1px,transparent_1px)] [background-size:20px_20px] opacity-70 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]"
         />
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 flex flex-col items-center text-center gap-6">
           <Reveal>
