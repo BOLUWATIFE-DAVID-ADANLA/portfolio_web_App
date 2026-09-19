@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import CalBooking from '@/components/cal-booking'
+import Reveal from '@/components/reveal'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -24,18 +25,24 @@ export default function ContactPage() {
           className="absolute inset-0 opacity-60 [background-image:linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
         />
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 flex flex-col items-center text-center gap-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
-            Open to new opportunities
-          </span>
-          <h1 className="text-4xl md:text-6xl font-light tracking-[-0.03em] text-foreground leading-[1.05]">
-            Let&apos;s build something <span className="text-muted-2">together</span>
-          </h1>
-          <p className="max-w-xl text-base text-muted leading-[1.7]">
-            Have a project, a role, or a question about automation and backend
-            systems? Pick a time that suits you, or grab my CV first.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+              Open to new opportunities
+            </span>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="text-4xl md:text-6xl font-light tracking-[-0.03em] text-foreground leading-[1.05]">
+              Let&apos;s build something <span className="text-muted-2">together</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="max-w-xl text-base text-muted leading-[1.7]">
+              Have a project, a role, or a question about automation and backend
+              systems? Pick a time that suits you, or grab my CV first.
+            </p>
+          </Reveal>
+          <Reveal delay={240} className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <button
               type="button"
               disabled
@@ -51,23 +58,25 @@ export default function ContactPage() {
             >
               Book a call
             </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section id="book" className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-14 md:py-20 scroll-mt-6 flex flex-col gap-10">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between pb-8 border-b border-border">
+        <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between pb-8 border-b border-border">
           <h2 className="text-3xl md:text-5xl font-light tracking-[-0.03em] text-foreground leading-[1.1] max-w-md">
             Book a 30-minute call
           </h2>
           <p className="text-sm text-muted leading-[1.7] max-w-xs">
             Tell me what you&apos;re working on and we&apos;ll figure out if I can help. Times are shown in your timezone.
           </p>
-        </div>
+        </Reveal>
 
-        <CalBooking />
+        <Reveal>
+          <CalBooking />
+        </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-2xl border border-border bg-border overflow-hidden">
+        <Reveal className="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-2xl border border-border bg-border overflow-hidden">
           {channels.map((c) => (
             <a
               key={c.label}
@@ -80,7 +89,7 @@ export default function ContactPage() {
               <span className="text-sm text-foreground break-all">{c.value}</span>
             </a>
           ))}
-        </div>
+        </Reveal>
       </section>
     </div>
   )

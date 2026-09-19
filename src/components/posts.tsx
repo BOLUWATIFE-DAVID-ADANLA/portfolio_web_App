@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Reveal from '@/components/reveal';
 import { getAllPosts } from '@/lib/posts/post';
 
 const Posts = () => {
@@ -8,12 +9,15 @@ const Posts = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-semibold text-sm text-foreground">Writing</h2>
+      <Reveal>
+        <h2 className="font-semibold text-sm text-foreground">Writing</h2>
+      </Reveal>
 
       <div className="flex flex-col gap-4">
-        {posts.map((post) => (
-          <div
+        {posts.map((post, i) => (
+          <Reveal
             key={post.slug}
+            delay={i * 70}
             className="md:grid md:grid-cols-[1fr_200px] md:gap-12 flex flex-col gap-1"
           >
             <div className="flex flex-col gap-1 min-w-0">
@@ -32,7 +36,7 @@ const Posts = () => {
                 day: 'numeric', month: 'short', year: 'numeric',
               })}
             </div>
-          </div>
+          </Reveal>
         ))}
 
         {posts.length === 0 && (
@@ -42,9 +46,11 @@ const Posts = () => {
         )}
 
         {posts.length > 0 && (
-          <Link href="/blog" className="link-underline w-fit text-xs text-muted mt-1">
-            All posts →
-          </Link>
+          <Reveal>
+            <Link href="/blog" className="link-underline w-fit text-xs text-muted mt-1">
+              All posts →
+            </Link>
+          </Reveal>
         )}
       </div>
     </section>

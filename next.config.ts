@@ -12,6 +12,9 @@ const withMDX = createMDX({
 })
 
 const nextConfig: NextConfig = {
+  experimental: {
+    viewTransition: true,
+  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   images: {
     remotePatterns: [
