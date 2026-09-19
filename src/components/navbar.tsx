@@ -19,6 +19,9 @@ const Navbar = () => {
         <Link href="/blog" className="link-underline w-fit text-sm text-muted hover:text-foreground transition-colors">
           Blog
         </Link>
+        <Link href="/contact" className="link-underline w-fit text-sm text-muted hover:text-foreground transition-colors">
+          Contact
+        </Link>
         <ThemeToggle />
       </div>
     </header>
