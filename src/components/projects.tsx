@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Reveal from '@/components/reveal';
 import { getAllCaseStudies } from '@/lib/work/work';
 
 const statusLabel: Record<string, string> = {
@@ -14,12 +15,15 @@ const Projects = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-semibold text-sm text-foreground">Work</h2>
+      <Reveal>
+        <h2 className="font-semibold text-sm text-foreground">Work</h2>
+      </Reveal>
 
       <div className="flex flex-col gap-4">
-        {studies.map((study) => (
-          <div
+        {studies.map((study, i) => (
+          <Reveal
             key={study.slug}
+            delay={i * 70}
             className="md:grid md:grid-cols-[1fr_200px] md:gap-12 flex flex-col gap-1"
           >
             <div className="flex flex-col gap-1 min-w-0">
@@ -37,13 +41,15 @@ const Projects = () => {
               <span className="text-foreground">{study.category}</span>
               <span className="text-muted-2">{statusLabel[study.status]}</span>
             </div>
-          </div>
+          </Reveal>
         ))}
 
         {studies.length > 0 && (
-          <Link href="/work" className="link-underline w-fit text-xs text-muted mt-1">
-            All work →
-          </Link>
+          <Reveal>
+            <Link href="/work" className="link-underline w-fit text-xs text-muted mt-1">
+              All work →
+            </Link>
+          </Reveal>
         )}
       </div>
     </section>

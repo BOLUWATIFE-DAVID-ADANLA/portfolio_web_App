@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Reveal from '@/components/reveal'
 import { getAllCaseStudies } from '@/lib/work/work'
 
 const statusLabel: Record<string, string> = {
@@ -13,7 +14,7 @@ export default function WorkPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 md:px-10 py-10 md:py-16 flex flex-col gap-10">
 
-      <div className="flex flex-col gap-3">
+      <Reveal className="flex flex-col gap-3">
         <Link href="/" className="link-underline w-fit text-xs text-muted">
           ← Home
         </Link>
@@ -25,12 +26,13 @@ export default function WorkPage() {
           and the automation and mobile projects that round out the rest. Most of these are
           being written up as I ship, this month and beyond.
         </p>
-      </div>
+      </Reveal>
 
       <div className="flex flex-col gap-5">
-        {studies.map((study) => (
-          <div
+        {studies.map((study, i) => (
+          <Reveal
             key={study.slug}
+            delay={Math.min(i, 8) * 60}
             className="md:grid md:grid-cols-[1fr_200px] md:gap-12 flex flex-col gap-1"
           >
             <div className="flex flex-col gap-1 min-w-0">
@@ -51,7 +53,7 @@ export default function WorkPage() {
               <span className="text-foreground">{study.category}</span>
               <span className="text-muted-2">{statusLabel[study.status]}</span>
             </div>
-          </div>
+          </Reveal>
         ))}
 
         {studies.length === 0 && (

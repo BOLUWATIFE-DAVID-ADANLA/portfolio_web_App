@@ -1,4 +1,5 @@
 import React from 'react';
+import Reveal from '@/components/reveal';
 
 const Hero = () => {
   const roles = ["Software Engineer", "AI Implementation Specialist", "Frontend & Mobile Engineer"];
@@ -20,7 +21,7 @@ const Hero = () => {
   return (
     <section className="md:grid md:grid-cols-[1fr_200px] md:gap-12 flex flex-col gap-10">
       <div className="flex flex-col gap-6">
-        <div>
+        <Reveal>
           <p className="text-sm text-muted leading-none mb-3">I&apos;m</p>
           <h1 className="text-4xl md:text-5xl font-light tracking-[-0.02em] leading-none text-foreground">
             Boluwatife
@@ -28,26 +29,28 @@ const Hero = () => {
           <p className="text-sm text-muted mt-3">
             {roles.join(" · ")}
           </p>
-        </div>
+        </Reveal>
 
-        <div className="flex flex-col gap-4 max-w-prose text-sm leading-[1.7] text-foreground">
+        <Reveal delay={100} className="flex flex-col gap-4 max-w-prose text-sm leading-[1.7] text-foreground">
           {bio.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
-        </div>
+        </Reveal>
       </div>
 
-      <aside className="md:pt-1">
-        <h2 className="font-semibold text-sm text-foreground mb-4">Now</h2>
-        <div className="flex flex-col gap-3">
-          {now.map((f) => (
-            <div key={f.label} className="flex flex-col gap-0.5">
-              <span className="text-xs text-muted">{f.label}</span>
-              <span className="text-sm text-foreground">{f.value}</span>
-            </div>
-          ))}
-        </div>
-      </aside>
+      <Reveal delay={200}>
+        <aside className="md:pt-1">
+          <h2 className="font-semibold text-sm text-foreground mb-4">Now</h2>
+          <div className="flex flex-col gap-3">
+            {now.map((f) => (
+              <div key={f.label} className="flex flex-col gap-0.5">
+                <span className="text-xs text-muted">{f.label}</span>
+                <span className="text-sm text-foreground">{f.value}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
+      </Reveal>
     </section>
   );
 };

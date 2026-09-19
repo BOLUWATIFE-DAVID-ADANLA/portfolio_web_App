@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import Reveal from '@/components/reveal'
 
 const whatIDo = [
   {
@@ -80,135 +81,145 @@ export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 md:px-10 py-10 md:py-16 flex flex-col gap-14">
 
-      <div className="flex flex-col gap-3">
+      <Reveal className="flex flex-col gap-3">
         <Link href="/" className="link-underline w-fit text-xs text-muted">
           ← Home
         </Link>
         <h1 className="text-3xl md:text-4xl font-light tracking-[-0.02em] text-foreground">
           About
         </h1>
-      </div>
+      </Reveal>
 
-      <section className="md:grid md:grid-cols-[1fr_240px] md:gap-14 flex flex-col-reverse gap-8 items-start">
-        <p className="text-base md:text-lg text-muted leading-[1.7] max-w-prose">
-          I work at the intersection of backend engineering, frontend and mobile development,
-          workflow automation, and AI implementation. Across 4+ years in software engineering,
-          spanning fintech, ERP, and
-          supply chain products, I have built the APIs, automation pipelines, and AI-driven
-          systems that turn ambiguous business processes into infrastructure a company can
-          actually run on — designing the architecture as much as writing the code that ships it.
-        </p>
+      <Reveal>
+        <section className="md:grid md:grid-cols-[1fr_240px] md:gap-14 flex flex-col-reverse gap-8 items-start">
+          <p className="text-base md:text-lg text-muted leading-[1.7] max-w-prose">
+            I work at the intersection of backend engineering, frontend and mobile development,
+            workflow automation, and AI implementation. Across 4+ years in software engineering,
+            spanning fintech, ERP, and
+            supply chain products, I have built the APIs, automation pipelines, and AI-driven
+            systems that turn ambiguous business processes into infrastructure a company can
+            actually run on — designing the architecture as much as writing the code that ships it.
+          </p>
 
-        <figure className="relative group md:sticky md:top-24 w-full">
-          <div className="absolute inset-0 -rotate-2 rounded-2xl bg-surface transition-transform duration-500 ease-out group-hover:-rotate-1" />
-          <div className="relative rounded-2xl bg-background p-2 ring-1 ring-border shadow-sm transition-transform duration-500 ease-out group-hover:-translate-y-1">
-            <Image
-              src="/images/about/boluwatife.jpg"
-              alt="Boluwatife David Adanla"
-              width={440}
-              height={585}
-              className="w-full h-auto rounded-xl object-cover transition-[filter] duration-500 grayscale-[0.15] group-hover:grayscale-0"
-              priority
-            />
-          </div>
-        </figure>
-      </section>
+          <figure className="relative group md:sticky md:top-24 w-full">
+            <div className="absolute inset-0 -rotate-2 rounded-2xl bg-surface transition-transform duration-500 ease-out group-hover:-rotate-1" />
+            <div className="relative rounded-2xl bg-background p-2 ring-1 ring-border shadow-sm transition-transform duration-500 ease-out group-hover:-translate-y-1">
+              <Image
+                src="/images/about/boluwatife.jpg"
+                alt="Boluwatife David Adanla"
+                width={440}
+                height={585}
+                className="w-full h-auto rounded-xl object-cover transition-[filter] duration-500 grayscale-[0.15] group-hover:grayscale-0"
+                priority
+              />
+            </div>
+          </figure>
+        </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-8">
-        <h2 className="font-semibold text-sm text-foreground">What I Do</h2>
+      <Reveal>
+        <section className="flex flex-col gap-8">
+          <h2 className="font-semibold text-sm text-foreground">What I Do</h2>
 
-        {whatIDo.map((group) => (
-          <div key={group.heading} className="flex flex-col gap-3">
-            <h3 className="text-sm text-foreground font-medium">{group.heading}</h3>
-            <ul className="list-disc pl-5 marker:text-muted-2 flex flex-col gap-2">
-              {group.items.map((item, i) => (
-                <li key={i} className="text-sm text-muted leading-relaxed">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section className="flex flex-col gap-4">
-        <h2 className="font-semibold text-sm text-foreground">Tech Stack</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {techStack.map((tech) => (
-            <div
-              key={tech.name}
-              className="flex items-center gap-3 rounded-lg border border-border bg-surface/50 px-3 py-2 text-sm text-muted transition-colors hover:[color:var(--brand,inherit)] hover:border-muted-2"
-              style={tech.hex ? ({ '--brand': `#${tech.hex}` } as React.CSSProperties) : undefined}
-            >
-              {tech.paths ? (
-                <svg
-                  role="img"
-                  viewBox={tech.viewBox ?? "0 0 24 24"}
-                  className="h-5 w-5 shrink-0"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {tech.paths.map((p, i) => (
-                    <path key={i} d={p.d} fill={p.fill} />
-                  ))}
-                </svg>
-              ) : tech.path ? (
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5 fill-current shrink-0"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d={tech.path} />
-                </svg>
-              ) : (
-                <span className="flex h-5 w-5 items-center justify-center rounded-sm bg-muted-2/20 text-[8px] font-semibold text-muted shrink-0">
-                  {tech.name
-                    .split(/\s+/)
-                    .map((w) => w[0])
-                    .join("")
-                    .slice(0, 3)
-                    .toUpperCase()}
-                </span>
-              )}
-              <span className="font-medium text-foreground">{tech.name}</span>
+          {whatIDo.map((group) => (
+            <div key={group.heading} className="flex flex-col gap-3">
+              <h3 className="text-sm text-foreground font-medium">{group.heading}</h3>
+              <ul className="list-disc pl-5 marker:text-muted-2 flex flex-col gap-2">
+                {group.items.map((item, i) => (
+                  <li key={i} className="text-sm text-muted leading-relaxed">
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
-        </div>
-      </section>
+        </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="font-semibold text-sm text-foreground">Beyond the Screen</h2>
-        <p className="text-sm text-muted leading-[1.7] max-w-prose">
-          Outside of engineering, I&apos;m learning French as part of a longer-term goal to
-          relocate to the EU. In my free time, you&apos;ll find me at the table tennis board or
-          over a chessboard, working through both the same way I work through a system:
-          patiently, and a few moves ahead. I also write poems and read widely, which keeps me
-          thinking in language and structure even when I&apos;m away from code.
-        </p>
-      </section>
+      <Reveal>
+        <section className="flex flex-col gap-4">
+          <h2 className="font-semibold text-sm text-foreground">Tech Stack</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {techStack.map((tech) => (
+              <div
+                key={tech.name}
+                className="flex items-center gap-3 rounded-lg border border-border bg-surface/50 px-3 py-2 text-sm text-muted transition-colors hover:[color:var(--brand,inherit)] hover:border-muted-2"
+                style={tech.hex ? ({ '--brand': `#${tech.hex}` } as React.CSSProperties) : undefined}
+              >
+                {tech.paths ? (
+                  <svg
+                    role="img"
+                    viewBox={tech.viewBox ?? "0 0 24 24"}
+                    className="h-5 w-5 shrink-0"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    {tech.paths.map((p, i) => (
+                      <path key={i} d={p.d} fill={p.fill} />
+                    ))}
+                  </svg>
+                ) : tech.path ? (
+                  <svg
+                    role="img"
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5 fill-current shrink-0"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={tech.path} />
+                  </svg>
+                ) : (
+                  <span className="flex h-5 w-5 items-center justify-center rounded-sm bg-muted-2/20 text-[8px] font-semibold text-muted shrink-0">
+                    {tech.name
+                      .split(/\s+/)
+                      .map((w) => w[0])
+                      .join("")
+                      .slice(0, 3)
+                      .toUpperCase()}
+                  </span>
+                )}
+                <span className="font-medium text-foreground">{tech.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </Reveal>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="font-semibold text-sm text-foreground">Let&apos;s Connect</h2>
-        <p className="text-sm text-muted leading-[1.7] max-w-prose">
-          I&apos;m always interested in discussing AI implementation for real business
-          workflows, backend architecture for data-heavy systems, and opportunities in oil and
-          gas, supply chain, and logistics where reliable systems actually matter. Feel free to
-          reach out through{' '}
-          <a
-            href="https://www.linkedin.com/in/boluwatife-adanla/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-underline text-foreground"
-          >
-            LinkedIn
-          </a>{' '}
-          or check out my{' '}
-          <Link href="/work" className="link-underline text-foreground">
-            projects
-          </Link>
-          .
-        </p>
-      </section>
+      <Reveal>
+        <section className="flex flex-col gap-4">
+          <h2 className="font-semibold text-sm text-foreground">Beyond the Screen</h2>
+          <p className="text-sm text-muted leading-[1.7] max-w-prose">
+            Outside of engineering, I&apos;m learning French as part of a longer-term goal to
+            relocate to the EU. In my free time, you&apos;ll find me at the table tennis board or
+            over a chessboard, working through both the same way I work through a system:
+            patiently, and a few moves ahead. I also write poems and read widely, which keeps me
+            thinking in language and structure even when I&apos;m away from code.
+          </p>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="flex flex-col gap-4">
+          <h2 className="font-semibold text-sm text-foreground">Let&apos;s Connect</h2>
+          <p className="text-sm text-muted leading-[1.7] max-w-prose">
+            I&apos;m always interested in discussing AI implementation for real business
+            workflows, backend architecture for data-heavy systems, and opportunities in oil and
+            gas, supply chain, and logistics where reliable systems actually matter. Feel free to
+            reach out through{' '}
+            <a
+              href="https://www.linkedin.com/in/boluwatife-adanla/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline text-foreground"
+            >
+              LinkedIn
+            </a>{' '}
+            or check out my{' '}
+            <Link href="/work" className="link-underline text-foreground">
+              projects
+            </Link>
+            .
+          </p>
+        </section>
+      </Reveal>
 
     </div>
   )

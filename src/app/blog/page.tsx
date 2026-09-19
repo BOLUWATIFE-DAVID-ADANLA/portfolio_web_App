@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Reveal from '@/components/reveal'
 import { getAllPosts } from '@/lib/posts/post'
 
 export default function BlogPage() {
@@ -7,19 +8,20 @@ export default function BlogPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 md:px-10 py-10 md:py-16 flex flex-col gap-10">
 
-      <div className="flex flex-col gap-3">
+      <Reveal className="flex flex-col gap-3">
         <Link href="/" className="link-underline w-fit text-xs text-muted">
           ← Home
         </Link>
         <h1 className="text-3xl md:text-4xl font-light tracking-[-0.02em] text-foreground">
           Blog
         </h1>
-      </div>
+      </Reveal>
 
       <div className="flex flex-col gap-5">
-        {posts.map((post) => (
-          <div
+        {posts.map((post, i) => (
+          <Reveal
             key={post.slug}
+            delay={Math.min(i, 8) * 60}
             className="md:grid md:grid-cols-[1fr_200px] md:gap-12 flex flex-col gap-1"
           >
             <div className="flex flex-col gap-1 min-w-0">
@@ -38,7 +40,7 @@ export default function BlogPage() {
                 day: 'numeric', month: 'short', year: 'numeric',
               })}
             </div>
-          </div>
+          </Reveal>
         ))}
 
         {posts.length === 0 && (
