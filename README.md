@@ -40,4 +40,6 @@ Cloudflare Workers Builds settings:
 | Build command | `npx opennextjs-cloudflare build` |
 | Deploy command | `npx wrangler versions upload` (non-production branches) |
 
+`wrangler.jsonc` also has a `build.command` fallback: if `.open-next/worker.js` is missing when wrangler runs, it runs `npx opennextjs-cloudflare build` itself (as `[custom build]` in the log). So a deploy still works if the dashboard build command is wrong, e.g. left as `npm run build`. When the dashboard build command is set correctly, the fallback is skipped.
+
 Local equivalents: `npm run preview`, `npm run upload`, `npm run deploy`.
