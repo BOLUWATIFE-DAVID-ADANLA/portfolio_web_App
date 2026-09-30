@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { CV_URL } from '@/lib/cv'
 import Reveal from '@/components/reveal'
 
 const whatIDo = [
@@ -214,7 +215,7 @@ export default function AboutPage() {
             </a>
             , check out my{' '}
             <a
-              href="https://docs.google.com/document/d/1CNyPHw0RmBwJuh4VY014V99KnzmfXGaFiUj8LNr2mbg/view"
+              href={CV_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="link-underline text-foreground"

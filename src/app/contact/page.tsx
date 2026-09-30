@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import CalBooking from '@/components/cal-booking'
 import Reveal from '@/components/reveal'
+import { CV_URL } from '@/lib/cv'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -43,15 +44,14 @@ export default function ContactPage() {
             </p>
           </Reveal>
           <Reveal delay={240} className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              title="Coming soon"
-              className={`${buttonBase} border border-border bg-background text-muted opacity-60 cursor-not-allowed`}
+            <a
+              href={CV_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${buttonBase} border border-border bg-background text-foreground hover:border-muted-2`}
             >
               Check out my CV
-            </button>
+            </a>
             <a
               href="#book"
               className={`${buttonBase} bg-foreground text-background hover:opacity-85`}
