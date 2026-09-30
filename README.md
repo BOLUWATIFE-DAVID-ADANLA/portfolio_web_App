@@ -38,6 +38,7 @@ Cloudflare Workers Builds settings:
 | Setting | Value |
 |---|---|
 | Build command | `npx opennextjs-cloudflare build` |
-| Deploy command | `npx wrangler versions upload` (non-production branches) |
+| Deploy command (production branch `main`) | `npx wrangler deploy` |
+| Non-production branch deploy command | `npx wrangler versions upload` |
 
 Local equivalents: `npm run preview`, `npm run upload`, `npm run deploy`.
