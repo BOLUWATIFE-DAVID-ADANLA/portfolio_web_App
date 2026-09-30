@@ -211,8 +211,17 @@ export default function AboutPage() {
               className="link-underline text-foreground"
             >
               LinkedIn
-            </a>{' '}
-            or check out my{' '}
+            </a>
+            , check out my{' '}
+            <a
+              href="https://docs.google.com/document/d/1CNyPHw0RmBwJuh4VY014V99KnzmfXGaFiUj8LNr2mbg/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline text-foreground"
+            >
+              CV
+            </a>
+            , or browse my{' '}
             <Link href="/work" className="link-underline text-foreground">
               projects
             </Link>
