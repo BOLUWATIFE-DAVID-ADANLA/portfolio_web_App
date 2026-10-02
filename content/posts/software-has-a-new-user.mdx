@@ -1,0 +1,52 @@
+---
+title: "Software Has a New User, and It Doesn't Care About Your Buttons"
+summary: "AI has given software a second kind of user — the agent — that never sees your interface. Here's what that changes about how we build, and why enterprise lock-in is moving rather than ending."
+date: "2026-10-02"
+tags: [Software, EDI, Integration, MCP, AI]
+---
+
+AI is changing how we build software, and in turn it is making us rethink how systems are architected and who they are built for.
+
+For a long time, the answer to "who is this for?" was a person. We spent our time thinking about how the buttons looked, how many taps a flow took, and whether users came back. Retention was the scoreboard, especially for social apps. Usability was what made software valuable.
+
+Enterprise has always played by different rules. I know plenty of enterprise software that is not visually appealing but gets the job done, and organisations put up with it. Vendors hold their customers in a chokehold through lock-in, and the customers are often unwilling to migrate, or even to work out what migrating would cost. Retention was never the problem. People paid for business value, not for looks.
+
+Then AI arrived. Organisations watched at first, unsure whether it was worth anything. A few years later, almost all of them want a share of the productivity gains and cost savings, including the companies that sell enterprise software. So the playbook changed. It used to be: find a problem and build software to fill the gap. Now it is: build software that solves the problem, then expose its capabilities to AI agents so organisations can build semi-autonomous or fully autonomous workflows. MCP (Model Context Protocol) has become the common way to do that, and companies like Figma, HubSpot and Google have all been pushed to support it.
+
+## The Agent Is the New User
+
+Here is what I think that really means. Software now has a second kind of user, and this one never sees your interface.
+
+An agent does not look at a screen. It reads the name of your tool, the description you wrote for it, and the schema of the inputs it accepts. From that alone, it decides whether to use you and how. That text is your interface now. A vague tool description is a mislabelled button. A confusing schema is a broken form.
+
+Error messages matter even more. A person who hits an error can squint, guess and try again. An agent reads exactly what you return and plans its next step from that. "400 Bad Request" tells it nothing. "pickup_date must be in YYYY-MM-DD format" lets it fix the problem and carry on.
+
+Even retention has an equivalent. The question used to be whether people come back. Now it is whether an agent, given a task and a list of available tools, picks yours and finishes the job with it.
+
+## We Have Been Here Before
+
+None of this feels entirely new to me, because I have worked in engineering, and much of that is enterprise systems in logistics. And my newfound joy is in EDI, where the circumstance is no different.
+
+In EDI, machines have been doing business with machines for decades. A shipper's system sends a carrier a load tender. The carrier's system answers with an acceptance or a decline. Status updates follow as the freight moves. In X12 terms, that is a 204, a 990 and a string of 214s, and nobody clicks anything.
+
+What that world teaches you is that when the user is a machine, the contract is the product. Every trading partner works from an implementation guide that spells out which fields are sent, which are required and what each code means. If the guide is ambiguous, the integration breaks, and it breaks in production with real freight attached.
+
+EDI is also rigid. Onboarding a new partner can take weeks of mapping and testing, because both sides must agree on everything in advance. Agents flip that. They read your tool descriptions at runtime and work out how to use you on the spot.
+
+## What Happens to the Chokehold
+
+That brings me back to lock-in.
+
+Part of enterprise lock-in has always been the interface itself. Staff are trained on the screens, processes are built around them, and nobody wants to retrain a whole department. Agents weaken that. An agent needs no training on a new UI. If two vendors expose similar tools, switching between them starts to look like a configuration change instead of a change management programme.
+
+The deeper lock-in was never the screens, though. It is the data, the history and the fact that the system is the record of truth. Agents do not loosen that. If anything, they tighten it, because the vendor decides what its MCP server exposes. A vendor can let agents read and act freely inside its product while still making it hard to get your data out in bulk.
+
+> Lock-in is not ending. It is moving. The fight used to be over who owns the screen. Now it is over who owns the data and what agents are allowed to do with it.
+
+Buyers used to ask how good the UI was. The better question now is what their agents can do with a system, and what they cannot.
+
+## Closing
+
+We are at the start of a new software paradigm. The software that wins will be the software an agent can understand, trust and chain into a workflow, whatever its buttons look like. Those of us who have spent years making machines talk to machines have a head start.
+
+Want to know what the future of EDI and enterprise software looks like? Take a look at what Tediware is building, where EDI is being reshaped for technical people and agents alike.
